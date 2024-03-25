@@ -40,6 +40,8 @@ def main():
     equip_gun_relay = cont.actuators["Equip_Gun_Relay"]
     spawnBullet = cont.actuators["spawnBullet"]
     restart = cont.actuators["Restart"]
+    fish_killed_relay = cont.actuators["FishKillRelay"]
+    circle_cursor = cont.actuators["Cursor"]
     
     ### Objects ###
     Loop_Controller = scene.objects["Loop_Controller"]
@@ -99,11 +101,30 @@ def main():
 
 
     if fish_shot.positive:
-        Loop_Controller.position.x = -21
-        Loop_Controller.position.y = 21
-        Loop_Controller.position.z = 1
-        cont.activate(equip_grenade_relay)
-        cont.activate(PlayerIdle)
+        cont.activate(fish_killed_relay)
+        own["Kills"] += 1
+        print(str(own["Kills"]))
+        if own["Kills"] == 1 and own["Round"] == 0:
+            Loop_Controller.position.x = -21
+            Loop_Controller.position.y = 21
+            Loop_Controller.position.z = 1
+            cont.activate(equip_grenade_relay)
+            cont.activate(PlayerIdle)
+            cont.activate(circle_cursor)
+        if own["Kills"] == 3 and own["Round"] == 2:
+            Loop_Controller.position.x = -21
+            Loop_Controller.position.y = 21
+            Loop_Controller.position.z = 1
+            cont.activate(equip_grenade_relay)
+            cont.activate(PlayerIdle)
+            cont.activate(circle_cursor)
+        if own["Kills"] == 4 and own["Round"] == 3:
+            Loop_Controller.position.x = -21
+            Loop_Controller.position.y = 21
+            Loop_Controller.position.z = 1
+            cont.activate(equip_grenade_relay)
+            cont.activate(PlayerIdle)
+            cont.activate(circle_cursor)
 
     if death_listen.positive:
         cont.activate(Death)
