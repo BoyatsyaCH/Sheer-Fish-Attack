@@ -21,12 +21,12 @@ def main():
     #    tracking.max = abs(maxLimit) 
     #    cont.activate(tracking)
     if own.position.z < 2.7:
-      Player.position.z += 20
+      Player.position.z += 24
       cont.deactivate(fish_trace)
       cont.activate(fish_look)
 
     if own.position.z >= 2.61:
-      tracking.velocity += 0.2
+      tracking.velocity += 0.4
       Player.position.z = 2.7
       cont.deactivate(fish_look)
       cont.activate(fish_trace)
